@@ -1,0 +1,41 @@
+forecast length: &fclength PT6H
+geometry:
+  fms initialization:
+    namelist filename: {{ run_dir }}/input.nml
+    field table filename: {{ run_dir }}/field_table
+  akbk: Data/fv3files/akbk127.nc4
+  layout: [{{ fc_nx }},{{ fc_ny }}]
+  io_layout: [1,1]
+  npx: 97
+  npy: 97
+  npz: 127
+  ntiles: 6
+  member_number: {{ ensemble_num }}
+  field metadata override: fieldmetadata/ufs.yaml
+model:
+  name: UFS
+  tstep: PT6H
+  forecast length: *fclength
+  ufs_run_directory: {{ run_dir }}
+  model variables: [ua,va,t,delp,sphum,ice_wat,liq_wat,o3mr,phis,
+                         slmsk,sheleg,tsea,vtype,stype,vfrac,stc,smc,snwdph,
+                         f10m,u_srf,v_srf]
+initial condition:
+  datetime: 2020-12-14T18:00:00Z
+  filetype: fms restart
+  datapath: {{ run_dir }}/INPUT
+  filename_core: fv_core.res.nc
+  filename_trcr: fv_tracer.res.nc
+  filename_sfcd: sfc_data.nc
+  filename_sfcw: fv_srf_wnd.res.nc
+  filename_cplr: coupler.res
+  state variables: [ua,va,t,delp,sphum,ice_wat,liq_wat,o3mr,phis,
+                         slmsk,sheleg,tsea,vtype,stype,vfrac,stc,smc,snwdph,
+                         f10m,u_srf,v_srf]
+output:
+  filetype: fms restart
+  datapath: ../Data/forecast
+  prefix: forecast.jediex.
+  first: PT6H
+  frequency: PT6H
+
