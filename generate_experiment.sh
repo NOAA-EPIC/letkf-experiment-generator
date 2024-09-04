@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # set some variables
-export da_nx=16
+export da_nx=8
 export da_ny=20
-export fc_nx=2
+export fc_nx=1
 export fc_ny=2
 export ensemble_size=80
 

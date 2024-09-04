@@ -51,8 +51,8 @@ observations:
       obsdatain:
         engine:
           type: H5File
-          obsfile: Data/hofx/new/scatwind_letkf-gfs_2020121500_m.nc4
-#         obsfile: Data/obs/testinput_tier_1/scatwind_obs_2020121500_m.nc4
+#         obsfile: Data/hofx/new/scatwind_letkf-gfs_2020121500_m.nc4
+          obsfile: Data/obs/testinput_tier_1/scatwind_obs_2020121500_m.nc4
 #         obsfile: Data/hofx/scatwind_letkf-gfs_2020121500_m.nc4
       obsdataout:
         engine:
@@ -82,8 +82,8 @@ observations:
       obsdatain:
         engine:
           type: H5File
-          obsfile: Data/hofx/new/amsua_n19_letkf-gfs_2020121500_m.nc4
-#         obsfile: Data/obs/testinput_tier_1/amsua_n19_obs_2020121500_m.nc4
+#         obsfile: Data/hofx/new/amsua_n19_letkf-gfs_2020121500_m.nc4
+          obsfile: Data/obs/testinput_tier_1/amsua_n19_obs_2020121500_m.nc4
 #         obsfile: Data/hofx/amsua_n19_letkf-gfs_2020121500_m.nc4
       obsdataout:
         engine:
@@ -129,8 +129,8 @@ observations:
       obsdatain:
         engine:
           type: H5File
-          obsfile: Data/hofx/new/sfc_letkf-gfs_2020121500_m.nc4
-#         obsfile: Data/obs/testinput_tier_1/sfc_obs_2020121500_m.nc4
+#         obsfile: Data/hofx/new/sfc_letkf-gfs_2020121500_m.nc4
+          obsfile: Data/obs/testinput_tier_1/sfc_obs_2020121500_m.nc4
 #         obsfile: Data/hofx/sfc_letkf-gfs_2020121500_m.nc4
       obsdataout:
         engine:
@@ -163,8 +163,8 @@ observations:
       obsdatain:
         engine:
           type: H5File
-          obsfile: Data/hofx/new/aircraft_letkf-gfs_2020121500_m.nc4
-#         obsfile: Data/obs/testinput_tier_1/aircraft_obs_2020121500_m.nc4
+#         obsfile: Data/hofx/new/aircraft_letkf-gfs_2020121500_m.nc4
+          obsfile: Data/obs/testinput_tier_1/aircraft_obs_2020121500_m.nc4
 #         obsfile: Data/hofx/aircraft_letkf-gfs_2020121500_m.nc4
       obsdataout:
         engine:
@@ -197,10 +197,10 @@ observations:
       max nobs: 50
 
 driver:
-  save posterior ensemble: true
+  save posterior ensemble: false
   save posterior mean: true
-  save posterior mean increment: true
-  save posterior ensemble increments: true
+  save posterior mean increment: false
+  save posterior ensemble increments: false
   read HX from disk: false
   do test prints: true
   do posterior observer: true
@@ -215,9 +215,14 @@ local ensemble DA:
 # for realistic output, use gfs filetype for output
 # here we are using latlon for ease of visualisation
 output:
-  filetype: auxgrid
-  gridtype: latlon
-  filename: Data/analysis/letkf/gfs/mem%{member}%/letkf.
+  filetype: fms restart
+  datapath: Data/analysis/mean/
+  gridtype: native grid
+  filename_core: fv_core.res.nc
+  filename_trcr: fv_tracer.res.nc
+  filename_sfcd: sfc_data.nc
+  filename_sfcw: fv_srf_wnd.res.nc
+  filename_cplr: coupler.res
 
 output increment:
   filetype: auxgrid
